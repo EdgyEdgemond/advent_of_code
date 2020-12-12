@@ -1,0 +1,31 @@
+from util import get_lines
+
+lines = get_lines(
+    day=12,
+    test=True,
+    type_conv=lambda x: (x[0], int(x[1:])),
+)
+
+current = [0, 0]
+dirs = ['E', 'S', 'W', 'N']
+movements = [(1, 0), (0, -1), (-1, 0), (0, 1)]
+facing = 'E'
+
+for action, amount in lines:
+    if action == 'F':
+        action = facing
+
+    if action in dirs:
+        i = dirs.index(action)
+        move = movements[i]
+        current[0] += move[0] * amount
+        current[1] += move[1] * amount
+
+    if action in ['L', 'R']:
+        i = dirs.index(facing)
+        i = i + 1 if action == 'R' else i - 1
+        i = 3 if i == -1 else i
+        i = 0 if i == 4 else i
+        facing = dirs[i]
+
+print(abs(current[0]) + abs(current[1]))
