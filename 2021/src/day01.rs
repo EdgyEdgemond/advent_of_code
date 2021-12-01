@@ -22,11 +22,8 @@ fn question_two(values: &Vec<i64>) -> anyhow::Result<i64> {
     let mut count = 0;
 
     let mut prev = values[0] + values[1] + values[2];
-    for (i, depth) in values.iter().enumerate() {
-        if i < 2 {
-            continue
-        }
-        let current = depth + values[i - 1] + values[i - 2];
+    for (i, depth) in values[2..].iter().enumerate() {
+        let current = depth + values[i + 1] + values[i];
         if current > prev {
             count += 1;
         }
