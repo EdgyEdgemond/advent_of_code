@@ -8,27 +8,24 @@ fn get_input(path: &str) -> anyhow::Result<Vec<i64>> {
 fn question_one(values: &Vec<i64>) -> anyhow::Result<i64> {
     let mut count = 0;
 
-    let mut prev = &values[0];
-    for depth in values.iter() {
-        if depth > prev {
+    for i in 1..values.len(){
+        if values[i] > values[i - 1] {
             count += 1;
         }
-        prev = depth;
     }
+
     return Ok(count)
 }
 
 fn question_two(values: &Vec<i64>) -> anyhow::Result<i64> {
     let mut count = 0;
 
-    let mut prev = values[0..=2].iter().fold(0, |acc, x| acc + x);
-    for (i, _) in values[2..].iter().enumerate() {
-        let current = values[i..=i+2].iter().fold(0, |acc, x| acc + x);
-        if current > prev {
+    for i in 3..values.len(){
+        if values[i] > values[i - 3] {
             count += 1;
         }
-        prev = current;
     }
+
     return Ok(count)
 }
 
