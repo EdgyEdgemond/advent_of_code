@@ -1,6 +1,3 @@
-// use std::collections::HashMap;
-
-
 fn question_one(commands: &[String]) -> anyhow::Result<u32> {
     let size = commands[0].len() as u32;
     let mut vec: Vec<i32> = Vec::with_capacity(size as usize);
@@ -18,8 +15,8 @@ fn question_one(commands: &[String]) -> anyhow::Result<u32> {
         }
     }
 
-    let mut gamma_rate = String::from("");
-    let mut epsilon_rate = String::from("");
+    let mut gamma_rate = String::new();
+    let mut epsilon_rate = String::new();
     for v in vec.iter() {
         match v > &0 {
             true => {
@@ -41,7 +38,7 @@ fn question_one(commands: &[String]) -> anyhow::Result<u32> {
 
 fn question_two(commands: &[String]) -> anyhow::Result<u32> {
     let size = commands[0].len() as u32;
-    let mut o_filter = String::from("");
+    let mut o_filter = String::new();
     let mut o_rating = 0;
     for i in 0..size + 1 {
         let mut char_rate = 0;
@@ -69,7 +66,7 @@ fn question_two(commands: &[String]) -> anyhow::Result<u32> {
         }
     }
     
-    let mut co2_filter = String::from("");
+    let mut co2_filter = String::new();
     let mut co2_rating = 0;
     for i in 0..size + 1 {
         let mut char_rate = 0;
