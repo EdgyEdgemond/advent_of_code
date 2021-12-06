@@ -3,7 +3,7 @@ use std::str::FromStr;
 use std::num::ParseIntError;
 
 #[derive(Debug)]
-struct Range {
+pub struct Range {
     x1: u32,
     x2: u32,
     y1: u32,
@@ -55,7 +55,7 @@ fn solution(input: &[Range], allow_diag: bool) -> anyhow::Result<u32> {
                 false => (range.y2..=range.y1).rev().collect(),
             };
             for i in r {
-                grid_base[usize::try_from(i).unwrap()][usize::try_from(range.x1).unwrap()] += 1
+                grid_base[i as usize][range.x1 as usize] += 1
             }
         } else if range.y1 == range.y2 {
             let r: Vec<u32> = match range.x1 < range.x2 {
@@ -63,7 +63,7 @@ fn solution(input: &[Range], allow_diag: bool) -> anyhow::Result<u32> {
                 false => (range.x2..=range.x1).rev().collect(),
             };
             for i in r {
-                grid_base[usize::try_from(range.y1).unwrap()][usize::try_from(i).unwrap()] += 1
+                grid_base[range.y1 as usize][i as usize] += 1
             }
         } else {
             let xr: Vec<u32> = match range.x1 < range.x2 {
@@ -76,7 +76,7 @@ fn solution(input: &[Range], allow_diag: bool) -> anyhow::Result<u32> {
             };
 
             for (i, v) in yr.iter().enumerate() {
-                grid_base[usize::try_from(*v).unwrap()][usize::try_from(xr[i]).unwrap()] += 1
+                grid_base[*v as usize][xr[i] as usize] += 1
             }
         }
     }
@@ -89,16 +89,16 @@ fn solution(input: &[Range], allow_diag: bool) -> anyhow::Result<u32> {
     Ok(total as u32)
 }
 
-fn question_one(input: &[Range]) -> anyhow::Result<u32> {
+pub fn question_one(input: &[Range]) -> anyhow::Result<u32> {
     return solution(input, false)
 }
 
 
-fn question_two(input: &[Range]) -> anyhow::Result<u32> {
+pub fn question_two(input: &[Range]) -> anyhow::Result<u32> {
     return solution(input, true)
 }
 
-fn get_input(path: &str) -> anyhow::Result<Vec<Range>> {
+pub fn get_input(path: &str) -> anyhow::Result<Vec<Range>> {
     Ok(std::fs::read_to_string(path)?
         .lines()
         .map(|l| l.parse())
@@ -116,27 +116,5 @@ fn run() -> anyhow::Result<()> {
 pub fn main() {
     if let Err(e) = run() {
         panic!("{:?}", e);
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    extern crate test;
-    use super::*;
-
-    #[bench]
-    fn benchmark_question_one(b: &mut test::Bencher) -> anyhow::Result<()> {
-        let commands = get_input("input/day05.txt")?;
-        b.iter(|| question_one(&commands));
-
-        Ok(())
-    }
-
-    #[bench]
-    fn benchmark_question_two(b: &mut test::Bencher) -> anyhow::Result<()> {
-        let commands = get_input("input/day05.txt")?;
-        b.iter(|| question_two(&commands));
-
-        Ok(())
     }
 }

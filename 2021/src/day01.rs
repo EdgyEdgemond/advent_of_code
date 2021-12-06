@@ -1,11 +1,11 @@
-fn get_input(path: &str) -> anyhow::Result<Vec<i64>> {
+pub fn get_input(path: &str) -> anyhow::Result<Vec<i64>> {
     Ok(std::fs::read_to_string(path)?
         .lines()
         .map(|l| l.parse())
         .collect::<Result<Vec<i64>, _>>()?)
 }
 
-fn question_one(values: &Vec<i64>) -> anyhow::Result<i64> {
+pub fn question_one(values: &Vec<i64>) -> anyhow::Result<i64> {
     let mut count = 0;
 
     for i in 1..values.len(){
@@ -17,7 +17,7 @@ fn question_one(values: &Vec<i64>) -> anyhow::Result<i64> {
     return Ok(count)
 }
 
-fn question_two(values: &Vec<i64>) -> anyhow::Result<i64> {
+pub fn question_two(values: &Vec<i64>) -> anyhow::Result<i64> {
     let mut count = 0;
 
     for i in 3..values.len(){
@@ -40,27 +40,5 @@ fn run() -> anyhow::Result<()> {
 pub fn main() {
     if let Err(e) = run() {
         panic!("{:?}", e);
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    extern crate test;
-    use super::*;
-
-    #[bench]
-    fn benchmark_question_one(b: &mut test::Bencher) -> anyhow::Result<()> {
-        let values = get_input("input/day01.txt")?;
-        b.iter(|| question_one(&values));
-
-        Ok(())
-    }
-
-    #[bench]
-    fn benchmark_question_two(b: &mut test::Bencher) -> anyhow::Result<()> {
-        let values = get_input("input/day01.txt")?;
-        b.iter(|| question_two(&values));
-
-        Ok(())
     }
 }

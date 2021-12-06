@@ -1,4 +1,4 @@
-fn question_one(commands: &[String]) -> anyhow::Result<u32> {
+pub fn question_one(commands: &[String]) -> anyhow::Result<u32> {
     let size = commands[0].len() as u32;
     let mut vec: Vec<i32> = Vec::with_capacity(size as usize);
     for _ in 0..size {
@@ -36,7 +36,7 @@ fn question_one(commands: &[String]) -> anyhow::Result<u32> {
 }
 
 
-fn question_two(commands: &[String]) -> anyhow::Result<u32> {
+pub fn question_two(commands: &[String]) -> anyhow::Result<u32> {
     let size = commands[0].len() as u32;
     let mut o_filter = String::new();
     let mut o_rating = 0;
@@ -97,7 +97,7 @@ fn question_two(commands: &[String]) -> anyhow::Result<u32> {
     Ok(o_rating * co2_rating)
 }
 
-fn get_input(path: &str) -> anyhow::Result<Vec<String>> {
+pub fn get_input(path: &str) -> anyhow::Result<Vec<String>> {
     Ok(std::fs::read_to_string(path)?
         .lines()
         .map(|l| l.parse())
@@ -115,27 +115,5 @@ fn run() -> anyhow::Result<()> {
 pub fn main() {
     if let Err(e) = run() {
         panic!("{:?}", e);
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    extern crate test;
-    use super::*;
-
-    #[bench]
-    fn benchmark_question_one(b: &mut test::Bencher) -> anyhow::Result<()> {
-        let commands = get_input("input/day03.txt")?;
-        b.iter(|| question_one(&commands));
-
-        Ok(())
-    }
-
-    #[bench]
-    fn benchmark_question_two(b: &mut test::Bencher) -> anyhow::Result<()> {
-        let commands = get_input("input/day03.txt")?;
-        b.iter(|| question_two(&commands));
-
-        Ok(())
     }
 }

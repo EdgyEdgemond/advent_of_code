@@ -2,7 +2,7 @@ use std::str::FromStr;
 use std::num::ParseIntError;
 
 #[derive(Debug)]
-struct Command {
+pub struct Command {
     direction: String,
     value: u32,
 }
@@ -61,14 +61,14 @@ impl AimPoint {
     }
 }
 
-fn get_input(path: &str) -> anyhow::Result<Vec<Command>> {
+pub fn get_input(path: &str) -> anyhow::Result<Vec<Command>> {
     Ok(std::fs::read_to_string(path)?
         .lines()
         .map(|l| l.parse())
         .collect::<Result<Vec<Command>, _>>()?)
 }
 
-fn question_one(commands: &[Command]) -> anyhow::Result<u32> {
+pub fn question_one(commands: &[Command]) -> anyhow::Result<u32> {
     let mut p = Point { x: 0, y: 0 };
 
     for c in commands {
@@ -83,7 +83,7 @@ fn question_one(commands: &[Command]) -> anyhow::Result<u32> {
     Ok(p.x * p.y)
 }
 
-fn question_two(commands: &[Command]) -> anyhow::Result<u32> {
+pub fn question_two(commands: &[Command]) -> anyhow::Result<u32> {
     let mut p = AimPoint { x: 0, y: 0, aim: 0 };
 
     for c in commands {
@@ -109,27 +109,5 @@ fn run() -> anyhow::Result<()> {
 pub fn main() {
     if let Err(e) = run() {
         panic!("{:?}", e);
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    extern crate test;
-    use super::*;
-
-    #[bench]
-    fn benchmark_question_one(b: &mut test::Bencher) -> anyhow::Result<()> {
-        let commands = get_input("input/day02.txt")?;
-        b.iter(|| question_one(&commands));
-
-        Ok(())
-    }
-
-    #[bench]
-    fn benchmark_question_two(b: &mut test::Bencher) -> anyhow::Result<()> {
-        let commands = get_input("input/day02.txt")?;
-        b.iter(|| question_two(&commands));
-
-        Ok(())
     }
 }

@@ -16,15 +16,15 @@ fn solution(ages: &Vec<u32>, days: u32) -> anyhow::Result<u64> {
     return Ok(day_counts.iter().fold(0, |sum, val| sum + val))
 }
 
-fn question_one(ages: &Vec<u32>) -> anyhow::Result<u64> {
+pub fn question_one(ages: &Vec<u32>) -> anyhow::Result<u64> {
     return solution(ages, 80)
 }
 
-fn question_two(ages: &Vec<u32>) -> anyhow::Result<u64> {
+pub fn question_two(ages: &Vec<u32>) -> anyhow::Result<u64> {
     return solution(ages, 256)
 }
 
-fn get_input(path: &str) -> anyhow::Result<Vec<u32>> {
+pub fn get_input(path: &str) -> anyhow::Result<Vec<u32>> {
     Ok(std::fs::read_to_string(path)?
         .lines()
         .next()
@@ -46,27 +46,5 @@ fn run() -> anyhow::Result<()> {
 pub fn main() {
     if let Err(e) = run() {
         panic!("{:?}", e);
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    extern crate test;
-    use super::*;
-
-    #[bench]
-    fn benchmark_question_one(b: &mut test::Bencher) -> anyhow::Result<()> {
-        let ages = get_input("input/day06.txt")?;
-        b.iter(|| question_one(&ages));
-
-        Ok(())
-    }
-
-    #[bench]
-    fn benchmark_question_two(b: &mut test::Bencher) -> anyhow::Result<()> {
-        let ages = get_input("input/day06.txt")?;
-        b.iter(|| question_two(&ages));
-
-        Ok(())
     }
 }

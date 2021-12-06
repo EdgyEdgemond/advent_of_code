@@ -37,7 +37,7 @@ fn board_total(board: &[Vec<u32>], checks: &[&mut [u32]]) -> u32 {
     total
 }
 
-fn question_one(numbers: &[u32], input: &[Vec<Vec<u32>>]) -> anyhow::Result<u32> {
+pub fn question_one(numbers: &[u32], input: &[Vec<Vec<u32>>]) -> anyhow::Result<u32> {
     let mut grid_raw = vec![1; 25 * input.len()];
     let mut grid_base: Vec<_> = grid_raw.as_mut_slice().chunks_mut(5).collect();
     let mut grid_checks: Vec<_> = grid_base.as_mut_slice().chunks_mut(5).collect();
@@ -66,7 +66,7 @@ fn question_one(numbers: &[u32], input: &[Vec<Vec<u32>>]) -> anyhow::Result<u32>
 }
 
 
-fn question_two(numbers: &[u32], input: &[Vec<Vec<u32>>]) -> anyhow::Result<u32> {
+pub fn question_two(numbers: &[u32], input: &[Vec<Vec<u32>>]) -> anyhow::Result<u32> {
     let mut grid_raw = vec![1; 25 * input.len()];
     let mut grid_base: Vec<_> = grid_raw.as_mut_slice().chunks_mut(5).collect();
     let mut grid_checks: Vec<_> = grid_base.as_mut_slice().chunks_mut(5).collect();
@@ -103,7 +103,7 @@ fn question_two(numbers: &[u32], input: &[Vec<Vec<u32>>]) -> anyhow::Result<u32>
     Ok(0)
 }
 
-fn get_input(path: &str) -> anyhow::Result<Vec<String>> {
+pub fn get_input(path: &str) -> anyhow::Result<Vec<String>> {
     Ok(std::fs::read_to_string(path)?
         .lines()
         .map(|l| l.parse())
@@ -153,27 +153,5 @@ fn run() -> anyhow::Result<()> {
 pub fn main() {
     if let Err(e) = run() {
         panic!("{:?}", e);
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    extern crate test;
-    use super::*;
-
-    #[bench]
-    fn benchmark_question_one(b: &mut test::Bencher) -> anyhow::Result<()> {
-        let commands = get_input("input/day04.txt")?;
-        b.iter(|| question_one(&commands));
-
-        Ok(())
-    }
-
-    #[bench]
-    fn benchmark_question_two(b: &mut test::Bencher) -> anyhow::Result<()> {
-        let commands = get_input("input/day04.txt")?;
-        b.iter(|| question_two(&commands));
-
-        Ok(())
     }
 }
