@@ -144,8 +144,8 @@ fn run() -> anyhow::Result<()> {
         )
         .collect::<Vec<Vec<Vec<u32>>>>();
 
-    println!("D3Q1: {}", question_one(&numbers, &boards)?);
-    println!("D3Q2: {}", question_two(&numbers, &boards)?);
+    println!("D4Q1: {}", question_one(&numbers, &boards)?);
+    println!("D4Q2: {}", question_two(&numbers, &boards)?);
 
     Ok(())
 }
