@@ -105,6 +105,18 @@ fn criterion_benchmark(c: &mut Criterion) {
             b.iter(|| aoc2021::day06::question_two(black_box(&input)))
         });
     }
+
+    #[cfg(feature = "day07")]
+    {
+        let input = aoc2021::day07::get_input("input/day07.txt").unwrap();
+
+        c.bench_function("d07p01", |b| {
+            b.iter(|| aoc2021::day07::question_one(black_box(&input)))
+        });
+        c.bench_function("d07p02", |b| {
+            b.iter(|| aoc2021::day07::question_two(black_box(&input)))
+        });
+    }
 }
 
 criterion_group!(benches, criterion_benchmark);
