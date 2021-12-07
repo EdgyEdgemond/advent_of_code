@@ -39,12 +39,8 @@ pub fn question_two(crabs: &Vec<u32>) -> anyhow::Result<u32> {
     for i in (0..=max_pos).rev() {
         let mut total = 0;
         for (x, count) in map.clone().into_iter() {
-            let d = if i > x {
-                i - x
-            } else {
-                x - i
-            };
-            let t = tri_map.get(&d).ok_or_else(|| anyhow!("Triangular not pre calculated for {}", d)).unwrap();
+            let d = (i as i32 - x as i32).abs();
+            let t = tri_map.get(&(d as u32)).ok_or_else(|| anyhow!("Triangular not pre calculated for {}", d)).unwrap();
             total += t * count;
         }
         if total < min {
