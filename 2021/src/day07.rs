@@ -24,18 +24,14 @@ pub fn question_one(crabs: &Vec<i32>) -> anyhow::Result<i32> {
 
 pub fn question_two(crabs: &Vec<i32>) -> anyhow::Result<i32> {
     let max_pos: i32 = crabs.iter().fold(0, |max, &val| if val > max{ val } else{ max });
-    let mut map: HashMap<i32, i32> = HashMap::new();
-    for x in crabs {
-        *map.entry(*x).or_default() += 1;
-    }
+    let min_pos: i32 = crabs.iter().fold(max_pos, |min, &val| if val < min{ val } else{ min });
 
     let mut min = i32::MAX;
-    for i in 0..=max_pos {
+    for i in min_pos..=max_pos {
         let mut total = 0;
-        for (x, count) in map.clone().into_iter() {
-            let d = (i as i32 - x as i32).abs();
-            let t = (d + d * d) / 2;
-            total += t * count;
+        for c in crabs {
+            let d = (i - c).abs();
+            total += (d + d * d) / 2;
         }
         if total < min {
             min = total;
