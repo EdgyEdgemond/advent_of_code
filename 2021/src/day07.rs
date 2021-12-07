@@ -1,46 +1,40 @@
 use anyhow::anyhow;
 use std::collections::HashMap;
 
-pub fn question_one(crabs: &Vec<u32>) -> anyhow::Result<i32> {
-    let max_pos = crabs.iter().fold(0, |max, &val| if val > max{ val } else{ max });
-    let mut map: HashMap<u32, i32> = HashMap::new();
+pub fn question_one(crabs: &Vec<i32>) -> anyhow::Result<i32> {
+    let mut positions = crabs.to_vec();
+    positions.sort_unstable();
+
+    let median = positions
+        .get(positions.len() / 2)
+        .ok_or_else(|| anyhow!("Couldn't find median."))?;
+
+    let mut map: HashMap<i32, i32> = HashMap::new();
+    for x in crabs {
+        *map.entry(*x).or_default() += 1;
+    }
+
+    let mut total = 0;
+    for (x, count) in map.clone().into_iter() {
+        total += (x as i32 - *median as i32).abs() * count;
+    }
+
+    Ok(total as i32)
+}
+
+pub fn question_two(crabs: &Vec<i32>) -> anyhow::Result<i32> {
+    let max_pos: i32 = crabs.iter().fold(0, |max, &val| if val > max{ val } else{ max });
+    let mut map: HashMap<i32, i32> = HashMap::new();
     for x in crabs {
         *map.entry(*x).or_default() += 1;
     }
 
     let mut min = i32::MAX;
-    for i in (0..max_pos).rev() {
-        let mut total = 0;
-        for (x, count) in map.clone().into_iter() {
-            total += (x as i32 - i as i32).abs() * count;
-        }
-        if total < min {
-            min = total;
-        }
-    }
-
-    Ok(min)
-}
-
-pub fn question_two(crabs: &Vec<u32>) -> anyhow::Result<u32> {
-    let max_pos: u32 = crabs.iter().fold(0, |max, &val| if val > max{ val } else{ max });
-    let mut map: HashMap<u32, u32> = HashMap::new();
-    let mut tri_map: HashMap<u32, u32> = HashMap::new();
-    for x in crabs {
-        *map.entry(*x).or_default() += 1;
-    }
-    let mut t = 0;
     for i in 0..=max_pos {
-        t += i;
-        tri_map.insert(i,  t);
-    }
-
-    let mut min = u32::MAX;
-    for i in (0..=max_pos).rev() {
         let mut total = 0;
         for (x, count) in map.clone().into_iter() {
             let d = (i as i32 - x as i32).abs();
-            let t = tri_map.get(&(d as u32)).ok_or_else(|| anyhow!("Triangular not pre calculated for {}", d)).unwrap();
+            let t = (d + d * d) / 2;
             total += t * count;
         }
         if total < min {
@@ -51,7 +45,7 @@ pub fn question_two(crabs: &Vec<u32>) -> anyhow::Result<u32> {
     Ok(min)
 }
 
-pub fn get_input(path: &str) -> anyhow::Result<Vec<u32>> {
+pub fn get_input(path: &str) -> anyhow::Result<Vec<i32>> {
     Ok(std::fs::read_to_string(path)?
         .lines()
         .next()
@@ -59,7 +53,7 @@ pub fn get_input(path: &str) -> anyhow::Result<Vec<u32>> {
         .unwrap()
         .split(',')
         .map(|n| n.parse())
-        .collect::<Result<Vec<u32>, _>>()?)
+        .collect::<Result<Vec<i32>, _>>()?)
 }
 
 fn run() -> anyhow::Result<()> {
