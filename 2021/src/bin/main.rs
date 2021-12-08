@@ -19,4 +19,7 @@ fn main() {
 
     #[cfg(feature = "day07")]
     aoc2021::day07::main();
+
+    #[cfg(feature = "day08")]
+    aoc2021::day08::main();
 }
