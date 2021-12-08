@@ -15,7 +15,6 @@ pub fn question_two(inputs: &Vec<(Vec<String>, Vec<String>)>) -> anyhow::Result<
     let mut total: i32 = 0;
     for input in inputs {
         let mut digits: Vec<String> = input.0.iter().map(|d| d.chars().sorted().collect::<String>()).collect();
-        digits.sort_unstable();
         digits.sort_by(|a, b| a.len().cmp(&b.len()));
 
         let mut map: HashMap<&str, char> = HashMap::new();
