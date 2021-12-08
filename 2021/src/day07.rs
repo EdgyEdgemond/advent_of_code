@@ -23,22 +23,15 @@ pub fn question_one(crabs: &Vec<i32>) -> anyhow::Result<i32> {
 }
 
 pub fn question_two(crabs: &Vec<i32>) -> anyhow::Result<i32> {
-    let max_pos: i32 = crabs.iter().fold(0, |max, &val| if val > max{ val } else{ max });
-    let min_pos: i32 = crabs.iter().fold(max_pos, |min, &val| if val < min{ val } else{ min });
+    let avg: i32 = crabs.iter().fold(0, |acc, &val| acc + val) / crabs.len() as i32;
 
-    let mut min = i32::MAX;
-    for i in min_pos..=max_pos {
-        let mut total = 0;
-        for c in crabs {
-            let d = (i - c).abs();
-            total += (d + d * d) / 2;
-        }
-        if total < min {
-            min = total;
-        }
+    let mut total = 0;
+    for c in crabs {
+        let d = (avg - c).abs();
+        total += (d + d * d) / 2;
     }
 
-    Ok(min)
+    Ok(total)
 }
 
 pub fn get_input(path: &str) -> anyhow::Result<Vec<i32>> {
