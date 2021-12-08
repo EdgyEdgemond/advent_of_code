@@ -49,7 +49,7 @@ pub fn question_two(inputs: &Vec<(Vec<String>, Vec<String>)>) -> anyhow::Result<
         map.insert(nine.as_str(), '9');
 
         // 2 is the five char code missing the same segment as 9
-        let lower_left = "abcdefg"
+        let lower_left = eight
             .chars()
             .filter(|c| !nine.contains(*c))
             .next()
