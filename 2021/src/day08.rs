@@ -118,8 +118,8 @@ pub fn get_input(path: &str) -> anyhow::Result<Vec<(Vec<String>, Vec<String>)>> 
 
 fn run() -> anyhow::Result<()> {
     let input = get_input("input/day08.txt")?;
-    println!("D7Q1: {}", question_one(&input)?);
-    println!("D7Q2: {}", question_two(&input)?);
+    println!("D8Q1: {}", question_one(&input)?);
+    println!("D8Q2: {}", question_two(&input)?);
 
     Ok(())
 }
