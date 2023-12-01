@@ -28,29 +28,52 @@ pub fn question_one(values: &Vec<String>) -> anyhow::Result<i64> {
     return Ok(sum)
 }
 
+const NUMBERS: [(&str, char); 9] = [
+    ("one", '1'),
+    ("two", '2'),
+    ("three", '3'),
+    ("four", '4'),
+    ("five", '5'),
+    ("six", '6'),
+    ("seven", '7'),
+    ("eight", '8'),
+    ("nine", '9'),
+];
+
 pub fn question_two(values: &Vec<String>) -> anyhow::Result<i64> {
     let mut sum = 0;
     for input in values.iter(){
-        let update = input
-            .replace("one", "o1e")
-            .replace("two", "t2o")
-            .replace("three", "th3ee")
-            .replace("four", "fo4r")
-            .replace("five", "fi5e")
-            .replace("six", "s6x")
-            .replace("seven", "se7en")
-            .replace("eight", "ei8ht")
-            .replace("nine", "ni9e");
         let mut val = "".to_string();
-        for c in update.chars(){
+        for i in 0..input.chars().count() {
+            // we've checked line length, unwrap doesn't risk out of bounds
+            let c = input.chars().nth(i).unwrap();
             if c.is_digit(10) {
                 val.push(c);
                 break;
             }
+            for (word, value) in NUMBERS {
+                if input[i..].starts_with(word) {
+                    val.push(value);
+                    break;
+                }
+            }
+            if val.chars().count() == 1 {
+                break;
+            }
         }
-        for c in update.chars().rev(){
+        for i in (0..input.chars().count()).rev() {
+            let c = input.chars().nth(i).unwrap();
             if c.is_digit(10) {
                 val.push(c);
+                break;
+            }
+            for (word, value) in NUMBERS {
+                if input[i..].starts_with(word) {
+                    val.push(value);
+                    break;
+                }
+            }
+            if val.chars().count() == 2 {
                 break;
             }
         }
