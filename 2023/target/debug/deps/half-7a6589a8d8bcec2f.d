@@ -1,0 +1,12 @@
+/home/edgy/code/edgy/advent_of_code/2023/target/debug/deps/libhalf-7a6589a8d8bcec2f.rmeta: /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/lib.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/bfloat.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/bfloat/convert.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/binary16.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/binary16/convert.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/slice.rs
+
+/home/edgy/code/edgy/advent_of_code/2023/target/debug/deps/libhalf-7a6589a8d8bcec2f.rlib: /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/lib.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/bfloat.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/bfloat/convert.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/binary16.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/binary16/convert.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/slice.rs
+
+/home/edgy/code/edgy/advent_of_code/2023/target/debug/deps/half-7a6589a8d8bcec2f.d: /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/lib.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/bfloat.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/bfloat/convert.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/binary16.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/binary16/convert.rs /home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/slice.rs
+
+/home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/lib.rs:
+/home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/bfloat.rs:
+/home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/bfloat/convert.rs:
+/home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/binary16.rs:
+/home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/binary16/convert.rs:
+/home/edgy/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.2/src/slice.rs:
